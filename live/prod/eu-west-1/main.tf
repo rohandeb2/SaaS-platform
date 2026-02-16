@@ -37,6 +37,8 @@ module "ecs_fargate" {
   vpc_id            = module.vpc.vpc_id
   public_subnet_ids = module.vpc.public_subnet_ids
   app_subnet_ids    = module.vpc.app_subnet_ids
+
+  app_mesh_node_arn = module.app_mesh.virtual_node_arn
   
   # Ensure your image is available in eu-west-1 ECR
   container_image   = "123456789012.dkr.ecr.eu-west-1.amazonaws.com/saas-api:latest"
@@ -62,5 +64,17 @@ module "aurora_secondary" {
   tags = {
     Tier = "Data"
     Role = "Secondary"
+  }
+}
+
+module "app_mesh" {
+  source              = "../../../modules/app-mesh"
+  name_prefix         = "acme-prod-euw1"      # Updated for EU
+  vpc_id              = module.vpc.vpc_id
+  cloud_map_namespace = "saas-eu.local"       # Unique namespace for EU
+
+  tags = {
+    Layer  = "ServiceMesh"
+    Region = "eu-west-1"
   }
 }

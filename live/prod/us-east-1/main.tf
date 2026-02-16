@@ -47,6 +47,8 @@ module "ecs_fargate" {
   vpc_id            = module.vpc.vpc_id
   public_subnet_ids = module.vpc.public_subnet_ids
   app_subnet_ids    = module.vpc.app_subnet_ids
+
+  app_mesh_node_arn = module.app_mesh.virtual_node_arn
   
   container_image   = "123456789012.dkr.ecr.us-east-1.amazonaws.com/saas-api:latest"
   container_port    = 8080
@@ -68,5 +70,20 @@ module "aurora" {
   
   tags = {
     Tier = "Data"
+  }
+}
+
+
+module "app_mesh" {
+  source      = "../../../modules/app-mesh"
+  name_prefix = "acme-prod-use1"
+  vpc_id      = module.vpc.vpc_id
+
+
+  # You will need to create a Cloud Map namespace first
+  cloud_map_namespace = "saas.local"
+
+  tags = {
+    Layer = "ServiceMesh"
   }
 }

@@ -27,3 +27,4 @@ output "green_target_group_name" {
 output "service_sg_id" {
   value = aws_security_group.ecs_service.id
 }
+

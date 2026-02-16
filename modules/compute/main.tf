@@ -41,7 +41,16 @@ resource "aws_ecs_task_definition" "api" {
       image     = "amazon/aws-xray-daemon"
       essential = true
       portMappings = [{ containerPort = 2000, protocol = "udp" }]
-    }
+    },
+  {
+    name  = "envoy"
+    image = "803981822549.dkr.ecr.us-east-1.amazonaws.com/aws-appmesh-envoy:v1.26.1.0-prod"
+    user  = "1337" # Essential for Envoy traffic interception
+
+    environment = [
+     { name = "APPMESH_RESOURCE_ARN", value = var.app_mesh_node_arn }
+    ]
+  }
   ])
 }
 

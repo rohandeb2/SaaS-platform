@@ -46,3 +46,8 @@ variable "max_capacity" {
   type    = number
   default = 10
 }
+
+variable "app_mesh_node_arn" {
+  type        = string
+  description = "The ARN of the App Mesh Virtual Node for this service"
+}
