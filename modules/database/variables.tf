@@ -1,3 +1,10 @@
+# Add this to modules/database/variables.tf
+
+variable "global_cluster_identifier" {
+  type        = string
+  description = "The ID of the Aurora Global Cluster. Set this only for secondary clusters joining an existing global cluster."
+  default     = null
+}
 variable "name_prefix" {
   type        = string
   description = "Prefix for resource naming (e.g., acme-prod-use1)"

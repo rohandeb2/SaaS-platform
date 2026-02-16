@@ -9,6 +9,9 @@ resource "aws_rds_cluster" "this" {
   cluster_identifier      = "${var.name_prefix}-aurora-cluster"
   engine                  = "aurora-postgresql"
   engine_version          = "15.4" # Or latest stable
+
+  global_cluster_identifier = var.global_cluster_identifier
+
   availability_zones      = var.availability_zones
   database_name           = var.db_name
   master_username         = "admin_user"
@@ -28,7 +31,7 @@ resource "aws_rds_cluster" "this" {
   skip_final_snapshot     = false
   final_snapshot_identifier = "${var.name_prefix}-final-snapshot"
 
-  depends_on = [aws_secretsmanager_secret_version.db_pass]i
+  depends_on = [aws_secretsmanager_secret_version.db_pass]
 
   enabled_cloudwatch_logs_exports = ["postgresql"]
 

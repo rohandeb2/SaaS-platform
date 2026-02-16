@@ -1,9 +1,31 @@
+# 1. Create a Security Group for VPC Endpoints
+resource "aws_security_group" "vpc_endpoints" {
+  name        = "acme-prod-use1-vpce-sg"
+  description = "Security group for VPC Interface Endpoints"
+  vpc_id      = module.vpc.vpc_id
+
+  ingress {
+    from_port   = 443
+    to_port     = 443
+    protocol    = "tcp"
+    cidr_blocks = ["10.0.0.0/16"] # Should match your vpc_cidr
+  }
+
+  tags = {
+    Name = "acme-prod-use1-vpce-sg"
+  }
+}
+
 # 1. Networking Layer
+# 2. Update the Networking Layer module call
 module "vpc" {
   source      = "../../../modules/networking"
   name_prefix = "acme-prod-use1"
   vpc_cidr    = "10.0.0.0/16"
-  
+
+  # Add this required line
+  endpoint_sg_id = aws_security_group.vpc_endpoints.id
+
   tags = {
     Layer = "Networking"
   }
