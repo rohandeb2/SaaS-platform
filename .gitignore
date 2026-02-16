@@ -1,0 +1,80 @@
+##########################################
+# Terraform Core
+##########################################
+
+# Local .terraform directories
+**/.terraform/*
+**/.terraform/
+
+# Terraform state files
+*.tfstate
+*.tfstate.*
+**/terraform.tfstate
+**/terraform.tfstate.*
+
+# Crash logs
+crash.log
+crash.*.log
+
+# Override files
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+##########################################
+# Terraform Lock File
+##########################################
+# KEEP this file in repo (important for provider version pinning)
+# Comment this if you want to commit lock file
+# .terraform.lock.hcl
+
+##########################################
+# Sensitive Variables
+##########################################
+
+*.tfvars
+*.tfvars.json
+terraform.tfvars
+terraform.tfvars.json
+
+# Environment files
+.env
+.env.*
+
+##########################################
+# Terraform CLI Config
+##########################################
+.terraformrc
+terraform.rc
+
+##########################################
+# OS / Editor Junk
+##########################################
+
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*.bak
+.idea/
+.vscode/
+
+##########################################
+# Logs
+##########################################
+*.log
+
+##########################################
+# Terragrunt (if you add later)
+##########################################
+.terragrunt-cache/
+
+##########################################
+# Test / Temp
+##########################################
+tmp/
+temp/
+.terraform
+.terraform.*
+
